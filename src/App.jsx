@@ -88,10 +88,10 @@ export default function App() {
       >
         <div className="flex items-center justify-between">
           <span className="text-xs" style={{ color: 'var(--color-muted)' }}>
-            Hurst Creator Studios © 2025
+            Creator Platform © 2025
           </span>
           <span className="text-xs" style={{ color: 'var(--color-muted)' }}>
-            Creator Roster — Internal
+            Talent Roster — Demo
           </span>
         </div>
       </footer>

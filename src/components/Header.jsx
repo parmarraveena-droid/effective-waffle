@@ -5,10 +5,10 @@ export default function Header({ creatorCount }) {
         <div className="flex items-center gap-6">
           <div>
             <div className="font-display text-xl tracking-tight" style={{ color: 'var(--color-ink)', letterSpacing: '-0.02em' }}>
-              Hurst Creator Studios
+              Creator Platform
             </div>
             <div className="text-xs tracking-widest uppercase mt-0.5" style={{ color: 'var(--color-muted)', letterSpacing: '0.14em' }}>
-              Center of Excellence
+              Talent Roster
             </div>
           </div>
         </div>
