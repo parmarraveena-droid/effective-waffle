@@ -34,7 +34,7 @@ export const creators = [
     status: 'contracted',
     contractType: 'Annual',
     bio: 'Wellness creator and movement coach with a devoted community. Known for transformative programs and an authentic approach to balanced living.',
-    photo: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['wellness', 'fitness', 'mindset'],
   },
   {
@@ -50,7 +50,7 @@ export const creators = [
     status: 'contracted',
     contractType: 'Annual',
     bio: 'Editorial style creator with an effortless aesthetic and a loyal luxury audience. Go-to voice for premium brand campaigns across platforms.',
-    photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['luxury', 'editorial', 'beauty'],
   },
   {
@@ -66,7 +66,7 @@ export const creators = [
     status: 'contracted',
     contractType: 'Annual',
     bio: 'Culture commentator and digital entertainer with unmatched Gen Z reach. Viral storyteller known for relatability and high-frequency output.',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['pop culture', 'comedy', 'storytelling'],
   },
   {
@@ -82,7 +82,7 @@ export const creators = [
     status: 'contracted',
     contractType: 'Project',
     bio: 'Food storyteller and culinary educator bridging heritage cooking with modern American kitchens. Award-nominated creator with deep community trust.',
-    photo: 'https://images.unsplash.com/photo-1614283233556-f35b0c801ef1?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['culinary', 'heritage', 'wellness'],
   },
 
@@ -100,7 +100,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Slow living advocate and interiors creator blending minimalism with warmth. Emerging voice in the considered living and home aesthetics space.',
-    photo: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['interiors', 'slow living', 'mindfulness'],
   },
   {
@@ -116,7 +116,7 @@ export const creators = [
     status: 'active',
     contractType: 'Project',
     bio: 'Fashion creator known for pushing boundaries while celebrating cultural identity. Rising voice in contemporary streetwear and personal style.',
-    photo: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop&crop=faces&facepad=2',
+    photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['streetwear', 'culture', 'beauty'],
   },
   {
@@ -132,7 +132,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Home chef bringing old-world cooking technique to accessible everyday meals. Cult following built around weekly series format and warm storytelling.',
-    photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['technique', 'home cooking', 'culture'],
   },
   {
@@ -148,7 +148,7 @@ export const creators = [
     status: 'active',
     contractType: 'Project',
     bio: 'Comedy writer and on-screen talent blending dry wit with social commentary. Resonates strongly across Millennial and Gen Z audiences.',
-    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['comedy', 'social commentary', 'scripted'],
   },
   {
@@ -164,7 +164,7 @@ export const creators = [
     status: 'pending',
     contractType: 'Handshake',
     bio: 'Wellness and identity creator speaking to an audience navigating healing, ambition, and modern life. High-trust community with strong word-of-mouth growth.',
-    photo: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['mental health', 'community', 'identity'],
   },
 
@@ -182,7 +182,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Movement instructor and breathwork practitioner with a deeply engaged niche community in the wellness space.',
-    photo: 'https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['movement', 'breathwork', 'wellness'],
   },
   {
@@ -198,7 +198,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Outdoor wellness advocate and recovery guide. High-trust community in the adventure, performance, and cold therapy space.',
-    photo: 'https://images.unsplash.com/photo-1552058544-f2b08422138a?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['outdoors', 'recovery', 'adventure'],
   },
 
@@ -216,7 +216,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Sustainable fashion advocate and vintage stylist bridging conscious consumption with elevated personal style.',
-    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['sustainable', 'vintage', 'styling'],
   },
   {
@@ -232,7 +232,7 @@ export const creators = [
     status: 'pending',
     contractType: 'Handshake',
     bio: "Men's grooming and luxury streetwear creator with exceptional conversion rates and an audience of high-intent buyers.",
-    photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['menswear', 'grooming', 'luxury'],
   },
 
@@ -250,7 +250,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Pastry chef and baking educator with a highly loyal following built around fermentation, sourdough, and technique-first content.',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['baking', 'fermentation', 'education'],
   },
   {
@@ -266,7 +266,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Regional cuisine creator bringing bold flavors to a new generation. Strong brand partnership history and rapidly growing platform presence.',
-    photo: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['regional', 'bold flavors', 'culture'],
   },
 
@@ -284,7 +284,7 @@ export const creators = [
     status: 'active',
     contractType: 'Handshake',
     bio: 'Pop culture commentator and micro-documentary creator known for long-form storytelling compressed into short-format video.',
-    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['pop culture', 'documentary', 'storytelling'],
   },
   {
@@ -300,7 +300,7 @@ export const creators = [
     status: 'pending',
     contractType: 'Handshake',
     bio: 'Music and culture essayist with a deeply engaged audience of enthusiasts. Known for thoughtful long-form video and sharp cultural perspective.',
-    photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop&crop=face',
+    photo: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['music', 'essays', 'culture'],
   },
 ];
