@@ -42,7 +42,7 @@ export default function App() {
         setSearchQuery={setSearchQuery}
       />
 
-      <main className="max-w-screen-xl mx-auto px-8 py-10">
+      <main style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
         {!hasResults ? (
           <div className="text-center py-24">
             <p className="font-display text-2xl mb-2" style={{ color: 'var(--color-ink)' }}>
@@ -82,18 +82,9 @@ export default function App() {
         )}
       </main>
 
-      <footer
-        className="max-w-screen-xl mx-auto px-8 py-6"
-        style={{ borderTop: '1px solid var(--color-border)' }}
-      >
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: 'var(--color-muted)' }}>
-            Creator Platform © 2025
-          </span>
-          <span className="text-xs" style={{ color: 'var(--color-muted)' }}>
-            Talent Roster — Demo
-          </span>
-        </div>
+      <footer style={{ maxWidth: '1600px', margin: '0 auto', padding: '20px 24px 32px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between' }}>
+        <span style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.06em' }}>Creator Platform © 2025</span>
+        <span style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.06em' }}>Talent Roster — Demo</span>
       </footer>
 
       {selectedCreator && (

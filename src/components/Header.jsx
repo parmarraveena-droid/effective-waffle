@@ -1,59 +1,58 @@
 export default function Header({ creatorCount }) {
   return (
-    <header style={{ borderBottom: '1px solid var(--color-border)' }} className="bg-white">
-      <div className="max-w-screen-xl mx-auto px-8 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <div>
-            <div className="font-display text-xl tracking-tight" style={{ color: 'var(--color-ink)', letterSpacing: '-0.02em' }}>
-              Creator Platform
-            </div>
-            <div className="text-xs tracking-widest uppercase mt-0.5" style={{ color: 'var(--color-muted)', letterSpacing: '0.14em' }}>
-              Talent Roster
-            </div>
-          </div>
+    <header style={{ borderBottom: '1px solid var(--border)', background: '#fff' }}>
+      <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '0 24px', height: '52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+        {/* Wordmark */}
+        <div style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--ink)' }}>
+          Creator Platform
         </div>
 
-        <nav className="hidden md:flex items-center gap-8">
-          {['Roster', 'Deliverables', 'Campaigns', 'Reports'].map((item, i) => (
+        {/* Nav */}
+        <nav style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+          {[['Roster', true], ['Deliverables', false], ['Campaigns', false], ['Reports', false]].map(([label, active]) => (
             <button
-              key={item}
-              className="text-sm font-medium"
+              key={label}
               style={{
-                color: i === 0 ? 'var(--color-ink)' : 'var(--color-muted)',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 fontFamily: 'Inter, sans-serif',
-                borderBottom: i === 0 ? '1px solid var(--color-ink)' : 'none',
+                fontSize: '11px',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                color: active ? 'var(--ink)' : 'var(--muted)',
+                borderBottom: active ? '1px solid var(--ink)' : '1px solid transparent',
                 paddingBottom: '2px',
               }}
             >
-              {item}
+              {label}
             </button>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <div
-            className="text-xs px-3 py-1.5 rounded-sm"
-            style={{ background: '#F0EDE8', color: 'var(--color-muted)' }}
-          >
-            {creatorCount} creators
-          </div>
+        {/* Right */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <span style={{ fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.04em' }}>
+            {creatorCount} talent
+          </span>
           <button
-            className="text-xs font-medium px-4 py-2 rounded-sm"
             style={{
-              background: 'var(--color-ink)',
-              color: 'white',
+              background: 'var(--ink)',
+              color: '#fff',
               border: 'none',
               cursor: 'pointer',
               fontFamily: 'Inter, sans-serif',
-              letterSpacing: '0.02em',
+              fontSize: '10px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              padding: '8px 16px',
             }}
           >
-            + Add Creator
+            + Add
           </button>
         </div>
+
       </div>
     </header>
   );

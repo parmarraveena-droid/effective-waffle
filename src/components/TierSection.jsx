@@ -4,40 +4,44 @@ export default function TierSection({ tier, tierKey, creators, onCreatorClick })
   if (creators.length === 0) return null;
 
   return (
-    <section className="mb-12">
-      <div
-        className="flex items-baseline gap-4 mb-6 pb-4"
-        style={{ borderBottom: '1px solid var(--color-border)' }}
-      >
-        <h2
-          className="font-display text-lg"
-          style={{ color: 'var(--color-ink)', letterSpacing: '-0.01em', margin: 0 }}
-        >
+    <section style={{ marginBottom: '56px' }}>
+
+      {/* Minimal section header */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
+        marginBottom: '20px',
+        paddingBottom: '12px',
+        borderBottom: '1px solid var(--border)',
+      }}>
+        <span style={{
+          fontSize: '10px',
+          letterSpacing: '0.14em',
+          textTransform: 'uppercase',
+          color: 'var(--ink)',
+          fontWeight: 500,
+        }}>
           {tier.label}
-        </h2>
-        <p className="text-sm" style={{ color: 'var(--color-muted)', margin: 0 }}>
+        </span>
+        <span style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.03em' }}>
           {tier.description}
-        </p>
-        <div className="ml-auto">
-          <span
-            className="text-xs px-2.5 py-1 rounded-sm"
-            style={{ background: '#F0EDE8', color: 'var(--color-muted)' }}
-          >
-            {creators.length}
-          </span>
-        </div>
+        </span>
+        <span style={{ marginLeft: 'auto', fontSize: '10px', color: 'var(--muted)' }}>
+          {creators.length}
+        </span>
       </div>
 
-      <div
-        className="grid gap-5"
-        style={{
-          gridTemplateColumns: tierKey === 'tier1'
-            ? 'repeat(auto-fill, minmax(220px, 1fr))'
-            : tierKey === 'tier2'
-            ? 'repeat(auto-fill, minmax(200px, 1fr))'
-            : 'repeat(auto-fill, minmax(180px, 1fr))',
-        }}
-      >
+      {/* Grid */}
+      <div style={{
+        display: 'grid',
+        gap: '2px',
+        gridTemplateColumns: tierKey === 'tier1'
+          ? 'repeat(auto-fill, minmax(220px, 1fr))'
+          : tierKey === 'tier2'
+          ? 'repeat(auto-fill, minmax(190px, 1fr))'
+          : 'repeat(auto-fill, minmax(165px, 1fr))',
+      }}>
         {creators.map(creator => (
           <CreatorCard
             key={creator.id}
@@ -46,6 +50,7 @@ export default function TierSection({ tier, tierKey, creators, onCreatorClick })
           />
         ))}
       </div>
+
     </section>
   );
 }
