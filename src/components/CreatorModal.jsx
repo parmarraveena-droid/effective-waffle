@@ -106,10 +106,23 @@ export default function CreatorModal({ creator, onClose, onEdit }) {
         </div>
 
         {/* Detail — right column */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '40px 36px' }}>
+        <div style={{ flex: 1, overflowY: 'auto', padding: '40px 36px', display: 'flex', flexDirection: 'column' }}>
 
-          {/* Close */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '28px' }}>
+          {/* Close + Edit */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginBottom: '28px' }}>
+            {onEdit && (
+              <button
+                onClick={() => { onClose(); onEdit(creator); }}
+                style={{
+                  background: 'none', border: '1px solid var(--border)', cursor: 'pointer',
+                  color: 'var(--muted)', fontSize: '10px', letterSpacing: '0.08em',
+                  textTransform: 'uppercase', padding: '5px 12px',
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                Edit
+              </button>
+            )}
             <button
               onClick={onClose}
               style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '18px', lineHeight: 1 }}
@@ -141,88 +154,228 @@ export default function CreatorModal({ creator, onClose, onEdit }) {
           <p style={{ fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.04em', marginBottom: '6px' }}>
             {creator.handle}
           </p>
-          <p style={{ fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.04em', marginBottom: '28px' }}>
+          <p style={{ fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.04em', marginBottom: '24px' }}>
             {archetype.label} · {creator.location}
           </p>
 
-          {/* Bio */}
-          <p style={{ fontSize: '12px', lineHeight: 1.7, color: '#3A3A3A', marginBottom: '28px' }}>
-            {creator.bio}
-          </p>
-
-          {/* Stats */}
-          <div style={{ display: 'flex', gap: '0', marginBottom: '28px', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
-            {[['Reach', creator.followers], ['Engagement', creator.engagement], ['Platforms', creator.platforms.length]].map(([label, val], i) => (
-              <div key={label} style={{
-                flex: 1,
-                padding: '16px 0',
-                borderRight: i < 2 ? '1px solid var(--border)' : 'none',
-                paddingLeft: i > 0 ? '20px' : 0,
-              }}>
-                <div style={{ fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em', color: 'var(--ink)' }}>{val}</div>
-                <div style={{ fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted)', marginTop: '3px' }}>{label}</div>
-              </div>
+          {/* Tabs */}
+          <div style={{ display: 'flex', gap: '0', borderBottom: '1px solid var(--border)', marginBottom: '24px' }}>
+            {[['overview', 'Overview'], ['deliverables', 'Deliverables'], ['notes', 'Notes']].map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif', fontSize: '10px',
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
+                  color: activeTab === key ? 'var(--ink)' : 'var(--muted)',
+                  padding: '8px 16px 8px 0',
+                  borderBottom: activeTab === key ? '1px solid var(--ink)' : '1px solid transparent',
+                  marginBottom: '-1px',
+                }}
+              >
+                {label}
+                {key === 'deliverables' && creatorDeliverables.length > 0 && (
+                  <span style={{ marginLeft: '5px', fontSize: '9px', color: 'var(--muted)' }}>
+                    {creatorDeliverables.length}
+                  </span>
+                )}
+                {key === 'notes' && creatorNotes.length > 0 && (
+                  <span style={{ marginLeft: '5px', fontSize: '9px', color: 'var(--muted)' }}>
+                    {creatorNotes.length}
+                  </span>
+                )}
+              </button>
             ))}
           </div>
 
-          {/* Platforms */}
-          <div style={{ marginBottom: '20px' }}>
-            <div style={{ fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '10px' }}>Platforms</div>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {creator.platforms.map(p => (
-                <span key={p} style={{
-                  display: 'flex', alignItems: 'center', gap: '5px',
-                  fontSize: '10px', letterSpacing: '0.06em', textTransform: 'capitalize',
-                  color: 'var(--ink)', border: '1px solid var(--border)',
-                  padding: '5px 10px',
-                }}>
-                  <span style={{ color: 'var(--muted)' }}>{PLATFORM_ICONS[p]}</span>
-                  {p}
-                </span>
-              ))}
-            </div>
-          </div>
+          {/* Tab content */}
+          {activeTab === 'overview' && (
+            <>
+              {/* Bio */}
+              <p style={{ fontSize: '12px', lineHeight: 1.7, color: '#3A3A3A', marginBottom: '28px' }}>
+                {creator.bio}
+              </p>
 
-          {/* Tags */}
-          <div style={{ marginBottom: '32px' }}>
-            <div style={{ fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '10px' }}>Content Areas</div>
-            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-              {creator.tags.map(tag => (
-                <span key={tag} style={{
-                  fontSize: '10px', letterSpacing: '0.06em', textTransform: 'capitalize',
-                  color: 'var(--muted)', background: 'var(--cream)',
-                  padding: '4px 10px',
-                }}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+              {/* Stats */}
+              <div style={{ display: 'flex', gap: '0', marginBottom: '28px', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+                {[['Reach', creator.followers], ['Engagement', creator.engagement], ['Platforms', creator.platforms.length]].map(([label, val], i) => (
+                  <div key={label} style={{
+                    flex: 1,
+                    padding: '16px 0',
+                    borderRight: i < 2 ? '1px solid var(--border)' : 'none',
+                    paddingLeft: i > 0 ? '20px' : 0,
+                  }}>
+                    <div style={{ fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em', color: 'var(--ink)' }}>{val}</div>
+                    <div style={{ fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted)', marginTop: '3px' }}>{label}</div>
+                  </div>
+                ))}
+              </div>
 
-          {/* Actions */}
-          <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
-            <button style={{
-              flex: 1, padding: '11px', background: 'var(--ink)', color: '#fff',
-              border: 'none', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
-              fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
-            }}>
-              View Profile
-            </button>
-            <button style={{
-              flex: 1, padding: '11px', background: 'transparent', color: 'var(--ink)',
-              border: '1px solid var(--border)', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
-              fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
-            }}>
-              Add to Campaign
-            </button>
-            <button style={{
-              padding: '11px 16px', background: 'transparent', color: 'var(--muted)',
-              border: '1px solid var(--border)', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
-              fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
-            }}>
-              Message
-            </button>
-          </div>
+              {/* Platforms */}
+              <div style={{ marginBottom: '20px' }}>
+                <div style={{ fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '10px' }}>Platforms</div>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {creator.platforms.map(p => (
+                    <span key={p} style={{
+                      display: 'flex', alignItems: 'center', gap: '5px',
+                      fontSize: '10px', letterSpacing: '0.06em', textTransform: 'capitalize',
+                      color: 'var(--ink)', border: '1px solid var(--border)',
+                      padding: '5px 10px',
+                    }}>
+                      <span style={{ color: 'var(--muted)' }}>{PLATFORM_ICONS[p]}</span>
+                      {p}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tags */}
+              <div style={{ marginBottom: '32px' }}>
+                <div style={{ fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '10px' }}>Content Areas</div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {creator.tags.map(tag => (
+                    <span key={tag} style={{
+                      fontSize: '10px', letterSpacing: '0.06em', textTransform: 'capitalize',
+                      color: 'var(--muted)', background: 'var(--cream)',
+                      padding: '4px 10px',
+                    }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
+                {onEdit && (
+                  <button
+                    onClick={() => { onClose(); onEdit(creator); }}
+                    style={{
+                      flex: 1, padding: '11px', background: 'var(--ink)', color: '#fff',
+                      border: 'none', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
+                      fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                    }}
+                  >
+                    Edit Creator
+                  </button>
+                )}
+                <button style={{
+                  flex: 1, padding: '11px', background: 'transparent', color: 'var(--ink)',
+                  border: '1px solid var(--border)', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
+                  fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                }}>
+                  Add to Campaign
+                </button>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'deliverables' && (
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+                <button
+                  onClick={handleQuickDeliverable}
+                  style={{
+                    background: 'none', border: '1px solid var(--border)', cursor: 'pointer',
+                    fontFamily: 'Inter, sans-serif', fontSize: '10px', letterSpacing: '0.08em',
+                    textTransform: 'uppercase', padding: '6px 14px', color: 'var(--ink)',
+                  }}
+                >
+                  + Add
+                </button>
+              </div>
+              {creatorDeliverables.length === 0 ? (
+                <p style={{ fontSize: '11px', color: 'var(--muted)', textAlign: 'center', padding: '40px 0' }}>
+                  No deliverables yet.
+                </p>
+              ) : (
+                <div>
+                  {creatorDeliverables.map(d => {
+                    const sc = DELIVERABLE_STATUS[d.status] || DELIVERABLE_STATUS.briefed;
+                    const overdue = d.dueDate < TODAY && d.status !== 'approved';
+                    return (
+                      <div
+                        key={d.id}
+                        style={{
+                          padding: '12px 0',
+                          borderBottom: '1px solid var(--border)',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'flex-start',
+                          gap: '12px',
+                        }}
+                      >
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink)', marginBottom: '3px' }}>
+                            {d.title}
+                            {overdue && (
+                              <span style={{ marginLeft: '6px', fontSize: '9px', color: '#C0392B', letterSpacing: '0.06em', textTransform: 'uppercase' }}>overdue</span>
+                            )}
+                          </div>
+                          <div style={{ fontSize: '10px', color: 'var(--muted)', textTransform: 'capitalize' }}>
+                            {d.type} · {d.platform}{d.dueDate ? ` · Due ${d.dueDate}` : ''}
+                          </div>
+                        </div>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '5px', flexShrink: 0 }}>
+                          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: sc.dot }} />
+                          <span style={{ fontSize: '10px', color: 'var(--muted)' }}>{sc.label}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'notes' && (
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <div style={{ flex: 1, marginBottom: '16px' }}>
+                {creatorNotes.length === 0 ? (
+                  <p style={{ fontSize: '11px', color: 'var(--muted)', textAlign: 'center', padding: '40px 0' }}>
+                    No notes yet.
+                  </p>
+                ) : (
+                  <div>
+                    {creatorNotes.map(note => (
+                      <div key={note.id} style={{ padding: '12px 0', borderBottom: '1px solid var(--border)' }}>
+                        <p style={{ fontSize: '12px', lineHeight: 1.65, color: '#3A3A3A', marginBottom: '5px' }}>{note.text}</p>
+                        <p style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.06em' }}>
+                          {new Date(note.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                <textarea
+                  value={noteText}
+                  onChange={e => setNoteText(e.target.value)}
+                  placeholder="Add a note…"
+                  onKeyDown={e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleAddNote(); }}
+                  rows={3}
+                  style={{
+                    width: '100%', border: '1px solid var(--border)', padding: '8px 10px',
+                    fontFamily: 'Inter, sans-serif', fontSize: '11px', color: 'var(--ink)',
+                    background: '#fff', outline: 'none', borderRadius: 0, resize: 'vertical',
+                    lineHeight: 1.6, marginBottom: '8px',
+                  }}
+                />
+                <button
+                  onClick={handleAddNote}
+                  style={{
+                    padding: '8px 18px', background: 'var(--ink)', color: '#fff',
+                    border: 'none', cursor: 'pointer', fontFamily: 'Inter, sans-serif',
+                    fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                  }}
+                >
+                  Add Note
+                </button>
+              </div>
+            </div>
+          )}
 
         </div>
       </div>

@@ -1,4 +1,11 @@
-export default function Header({ creatorCount }) {
+const NAV_ITEMS = [
+  { key: 'roster', label: 'Roster' },
+  { key: 'deliverables', label: 'Deliverables' },
+  { key: 'campaigns', label: 'Campaigns' },
+  { key: 'reports', label: 'Reports' },
+];
+
+export default function Header({ creatorCount, activeView, onViewChange, onAddCreator }) {
   return (
     <header style={{ borderBottom: '1px solid var(--border)', background: '#fff' }}>
       <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '0 24px', height: '52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -10,25 +17,29 @@ export default function Header({ creatorCount }) {
 
         {/* Nav */}
         <nav style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-          {[['Roster', true], ['Deliverables', false], ['Campaigns', false], ['Reports', false]].map(([label, active]) => (
-            <button
-              key={label}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '11px',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                color: active ? 'var(--ink)' : 'var(--muted)',
-                borderBottom: active ? '1px solid var(--ink)' : '1px solid transparent',
-                paddingBottom: '2px',
-              }}
-            >
-              {label}
-            </button>
-          ))}
+          {NAV_ITEMS.map(({ key, label }) => {
+            const active = activeView === key;
+            return (
+              <button
+                key={key}
+                onClick={() => onViewChange(key)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '11px',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  color: active ? 'var(--ink)' : 'var(--muted)',
+                  borderBottom: active ? '1px solid var(--ink)' : '1px solid transparent',
+                  paddingBottom: '2px',
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Right */}
@@ -37,6 +48,7 @@ export default function Header({ creatorCount }) {
             {creatorCount} talent
           </span>
           <button
+            onClick={onAddCreator}
             style={{
               background: 'var(--ink)',
               color: '#fff',

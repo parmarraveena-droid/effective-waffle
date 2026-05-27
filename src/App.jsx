@@ -1,14 +1,18 @@
 import { useState, useMemo } from 'react';
-import { creators, TIERS } from './data/creators';
+import { TIERS } from './data/creators';
+import { AppProvider, useApp } from './context/AppContext';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import TierSection from './components/TierSection';
 import CreatorModal from './components/CreatorModal';
+import CreatorForm from './components/CreatorForm';
+import DeliverablesView from './views/DeliverablesView';
+import CampaignsView from './views/CampaignsView';
 
-export default function App() {
+function RosterView({ onCreatorClick }) {
+  const { creators } = useApp();
   const [filters, setFilters] = useState({ tier: null, archetype: null, status: null });
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCreator, setSelectedCreator] = useState(null);
 
   const filtered = useMemo(() => {
     return creators.filter(c => {
@@ -21,27 +25,24 @@ export default function App() {
           c.name.toLowerCase().includes(q) ||
           c.handle.toLowerCase().includes(q) ||
           c.location.toLowerCase().includes(q) ||
-          c.tags.some(t => t.includes(q))
+          (c.tags || []).some(t => t.toLowerCase().includes(q))
         );
       }
       return true;
     });
-  }, [filters, searchQuery]);
+  }, [creators, filters, searchQuery]);
 
   const byTier = tierKey => filtered.filter(c => c.tier === tierKey);
-
   const hasResults = filtered.length > 0;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-cream)' }}>
-      <Header creatorCount={creators.length} />
+    <>
       <FilterBar
         filters={filters}
         setFilters={setFilters}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-
       <main style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
         {!hasResults ? (
           <div className="text-center py-24">
@@ -76,11 +77,59 @@ export default function App() {
               tier={tier}
               tierKey={tierKey}
               creators={byTier(tierKey)}
-              onCreatorClick={setSelectedCreator}
+              onCreatorClick={onCreatorClick}
             />
           ))
         )}
       </main>
+    </>
+  );
+}
+
+function ReportsView() {
+  return (
+    <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
+      <div style={{ textAlign: 'center', padding: '100px 0' }}>
+        <div style={{ fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '12px' }}>
+          Reports
+        </div>
+        <h2 style={{ fontSize: '22px', fontWeight: 400, letterSpacing: '-0.01em', color: 'var(--ink)', marginBottom: '8px' }}>
+          Coming Soon
+        </h2>
+        <p style={{ fontSize: '12px', color: 'var(--muted)', lineHeight: 1.7 }}>
+          Analytics, performance summaries, and campaign reporting will appear here.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AppInner() {
+  const { creators } = useApp();
+  const [activeView, setActiveView] = useState('roster');
+  const [selectedCreator, setSelectedCreator] = useState(null);
+  const [creatorFormMode, setCreatorFormMode] = useState(null);
+  const [creatorFormTarget, setCreatorFormTarget] = useState(null);
+
+  const openAdd = () => { setCreatorFormTarget(null); setCreatorFormMode('add'); };
+  const openEdit = (creator) => { setCreatorFormTarget(creator); setCreatorFormMode('edit'); };
+  const closeForm = () => { setCreatorFormMode(null); setCreatorFormTarget(null); };
+
+  return (
+    <div style={{ minHeight: '100vh', background: '#fff' }}>
+      <Header
+        creatorCount={creators.length}
+        activeView={activeView}
+        onViewChange={setActiveView}
+        onAddCreator={openAdd}
+      />
+
+      {activeView === 'roster' && (
+        <RosterView onCreatorClick={setSelectedCreator} />
+      )}
+      {activeView === 'deliverables' && <DeliverablesView />}
+      {activeView === 'campaigns' && <CampaignsView />}
+      {activeView === 'reports' && <ReportsView />}
 
       <footer style={{ maxWidth: '1600px', margin: '0 auto', padding: '20px 24px 32px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between' }}>
         <span style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.06em' }}>Creator Platform © 2025</span>
@@ -91,8 +140,25 @@ export default function App() {
         <CreatorModal
           creator={selectedCreator}
           onClose={() => setSelectedCreator(null)}
+          onEdit={(creator) => { setSelectedCreator(null); openEdit(creator); }}
+        />
+      )}
+
+      {creatorFormMode && (
+        <CreatorForm
+          mode={creatorFormMode}
+          creator={creatorFormTarget}
+          onClose={closeForm}
         />
       )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <AppInner />
+    </AppProvider>
   );
 }
