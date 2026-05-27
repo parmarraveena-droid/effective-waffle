@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ARCHETYPES, TIERS } from '../data/creators';
+import { useApp } from '../context/AppContext';
 
 const STATUS_COLORS = {
   contracted: { dot: '#2A7A3B', label: 'Contracted' },
@@ -15,7 +16,20 @@ const PLATFORM_ICONS = {
   substack: <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: 13, height: 13 }}><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>,
 };
 
-export default function CreatorModal({ creator, onClose }) {
+const TODAY = new Date().toISOString().slice(0, 10);
+
+const DELIVERABLE_STATUS = {
+  briefed:      { dot: '#8A8A8A', label: 'Briefed' },
+  'in-progress':{ dot: '#2B5EA7', label: 'In Progress' },
+  delivered:    { dot: '#A0652A', label: 'Delivered' },
+  approved:     { dot: '#2A7A3B', label: 'Approved' },
+};
+
+export default function CreatorModal({ creator, onClose, onEdit }) {
+  const { notes, addNote, deliverables, addDeliverable, campaigns } = useApp();
+  const [activeTab, setActiveTab] = useState('overview');
+  const [noteText, setNoteText] = useState('');
+
   useEffect(() => {
     const fn = e => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', fn);
@@ -27,6 +41,32 @@ export default function CreatorModal({ creator, onClose }) {
   const archetype = ARCHETYPES[creator.archetype];
   const tier = TIERS[creator.tier];
   const status = STATUS_COLORS[creator.status] || STATUS_COLORS.active;
+
+  const creatorNotes = notes[creator.id] || [];
+  const creatorDeliverables = deliverables.filter(d => d.creatorId === creator.id);
+
+  const handleAddNote = () => {
+    if (!noteText.trim()) return;
+    addNote(creator.id, noteText.trim());
+    setNoteText('');
+  };
+
+  const handleQuickDeliverable = () => {
+    const title = prompt('Deliverable title:');
+    if (!title) return;
+    addDeliverable({
+      id: crypto.randomUUID(),
+      creatorId: creator.id,
+      title,
+      type: 'post',
+      platform: creator.platforms[0] || 'instagram',
+      dueDate: '',
+      status: 'briefed',
+      contractType: 'contracted',
+      campaignId: null,
+      notes: '',
+    });
+  };
 
   return (
     <div
