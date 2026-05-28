@@ -36,9 +36,12 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['wellness', 'fitness', 'mindset'],
     titleAssignments: [
+      { titleId: 'magazine-1', tier: 'tier1' },
       { titleId: 'magazine-2', tier: 'tier1' },
+      { titleId: 'magazine-4', tier: 'tier1' },
+      { titleId: 'magazine-6', tier: 'tier1' },
       { titleId: 'magazine-7', tier: 'tier1' },
-      { titleId: 'magazine-8', tier: 'tier2' },
+      { titleId: 'magazine-8', tier: 'tier1' },
     ],
   },
   {
@@ -59,7 +62,9 @@ export const creators = [
     titleAssignments: [
       { titleId: 'magazine-1', tier: 'tier1' },
       { titleId: 'magazine-3', tier: 'tier1' },
+      { titleId: 'magazine-5', tier: 'tier1' },
       { titleId: 'magazine-8', tier: 'tier1' },
+      { titleId: 'magazine-9', tier: 'tier1' },
     ],
   },
   {
@@ -78,6 +83,7 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['pop culture', 'comedy', 'storytelling'],
     titleAssignments: [
+      { titleId: 'magazine-3', tier: 'tier1' },
       { titleId: 'magazine-5', tier: 'tier1' },
       { titleId: 'magazine-6', tier: 'tier1' },
       { titleId: 'magazine-10', tier: 'tier1' },
@@ -99,8 +105,11 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['culinary', 'heritage', 'wellness'],
     titleAssignments: [
+      { titleId: 'magazine-2', tier: 'tier1' },
       { titleId: 'magazine-4', tier: 'tier1' },
+      { titleId: 'magazine-7', tier: 'tier1' },
       { titleId: 'magazine-9', tier: 'tier1' },
+      { titleId: 'magazine-10', tier: 'tier1' },
     ],
   },
   {
@@ -119,8 +128,10 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['interiors', 'slow living', 'mindfulness'],
     titleAssignments: [
+      { titleId: 'magazine-1', tier: 'tier2' },
       { titleId: 'magazine-2', tier: 'tier2' },
-      { titleId: 'magazine-7', tier: 'tier1' },
+      { titleId: 'magazine-4', tier: 'tier2' },
+      { titleId: 'magazine-7', tier: 'tier2' },
     ],
   },
   {
@@ -141,6 +152,8 @@ export const creators = [
     titleAssignments: [
       { titleId: 'magazine-1', tier: 'tier2' },
       { titleId: 'magazine-3', tier: 'tier2' },
+      { titleId: 'magazine-6', tier: 'tier2' },
+      { titleId: 'magazine-8', tier: 'tier2' },
     ],
   },
   {
@@ -160,6 +173,7 @@ export const creators = [
     tags: ['technique', 'home cooking', 'culture'],
     titleAssignments: [
       { titleId: 'magazine-4', tier: 'tier2' },
+      { titleId: 'magazine-7', tier: 'tier2' },
       { titleId: 'magazine-9', tier: 'tier2' },
     ],
   },
@@ -181,6 +195,7 @@ export const creators = [
     titleAssignments: [
       { titleId: 'magazine-5', tier: 'tier2' },
       { titleId: 'magazine-6', tier: 'tier2' },
+      { titleId: 'magazine-8', tier: 'tier2' },
       { titleId: 'magazine-10', tier: 'tier2' },
     ],
   },
@@ -200,8 +215,11 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['mental health', 'community', 'identity'],
     titleAssignments: [
+      { titleId: 'magazine-2', tier: 'tier2' },
       { titleId: 'magazine-3', tier: 'tier2' },
-      { titleId: 'magazine-10', tier: 'tier1' },
+      { titleId: 'magazine-5', tier: 'tier2' },
+      { titleId: 'magazine-9', tier: 'tier2' },
+      { titleId: 'magazine-10', tier: 'tier2' },
     ],
   },
   {
@@ -220,8 +238,13 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['movement', 'breathwork', 'wellness'],
     titleAssignments: [
+      { titleId: 'magazine-1', tier: 'bench', exclusive: false },
       { titleId: 'magazine-2', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-4', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-6', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-7', tier: 'bench', exclusive: false },
       { titleId: 'magazine-8', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-9', tier: 'bench', exclusive: false },
     ],
   },
   {
@@ -240,8 +263,13 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['outdoors', 'recovery', 'adventure'],
     titleAssignments: [
+      { titleId: 'magazine-1', tier: 'bench', exclusive: false },
       { titleId: 'magazine-2', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-3', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-5', tier: 'bench', exclusive: false },
       { titleId: 'magazine-7', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-8', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-9', tier: 'bench', exclusive: false },
     ],
   },
   {
@@ -261,8 +289,12 @@ export const creators = [
     tags: ['sustainable', 'vintage', 'styling'],
     titleAssignments: [
       { titleId: 'magazine-1', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-2', tier: 'bench', exclusive: false },
       { titleId: 'magazine-3', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-6', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-7', tier: 'bench', exclusive: false },
       { titleId: 'magazine-8', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-10', tier: 'bench', exclusive: false },
     ],
   },
   {
@@ -283,7 +315,10 @@ export const creators = [
     titleAssignments: [
       { titleId: 'magazine-1', tier: 'bench', exclusive: false },
       { titleId: 'magazine-3', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-4', tier: 'bench', exclusive: false },
       { titleId: 'magazine-5', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-8', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-10', tier: 'bench', exclusive: false },
     ],
   },
   {
@@ -302,7 +337,9 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['baking', 'fermentation', 'education'],
     titleAssignments: [
+      { titleId: 'magazine-2', tier: 'bench', exclusive: false },
       { titleId: 'magazine-4', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-6', tier: 'bench', exclusive: false },
       { titleId: 'magazine-7', tier: 'bench', exclusive: false },
       { titleId: 'magazine-9', tier: 'bench', exclusive: true },
     ],
@@ -323,8 +360,12 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['regional', 'bold flavors', 'culture'],
     titleAssignments: [
+      { titleId: 'magazine-2', tier: 'bench', exclusive: false },
       { titleId: 'magazine-4', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-5', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-7', tier: 'bench', exclusive: false },
       { titleId: 'magazine-9', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-10', tier: 'bench', exclusive: false },
     ],
   },
   {
@@ -343,7 +384,12 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['pop culture', 'documentary', 'storytelling'],
     titleAssignments: [
+      { titleId: 'magazine-1', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-3', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-4', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-5', tier: 'bench', exclusive: false },
       { titleId: 'magazine-6', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-8', tier: 'bench', exclusive: false },
       { titleId: 'magazine-10', tier: 'bench', exclusive: false },
     ],
   },
@@ -363,8 +409,10 @@ export const creators = [
     photo: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['music', 'essays', 'culture'],
     titleAssignments: [
+      { titleId: 'magazine-3', tier: 'bench', exclusive: false },
       { titleId: 'magazine-5', tier: 'bench', exclusive: false },
       { titleId: 'magazine-6', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-9', tier: 'bench', exclusive: false },
       { titleId: 'magazine-10', tier: 'bench', exclusive: false },
     ],
   },

@@ -60,7 +60,7 @@ export default function TitlesView({ onCreatorClick }) {
     <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
 
       {/* Archetype filter bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '40px', paddingBottom: '20px', borderBottom: '1px solid var(--border)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px', flexWrap: 'wrap' }}>
         <span style={{ fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', flexShrink: 0 }}>
           Browse by archetype
         </span>
@@ -87,68 +87,100 @@ export default function TitlesView({ onCreatorClick }) {
         </span>
       </div>
 
-      {/* Title cards grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1px', background: 'var(--border)' }}>
-        {titles.map(title => {
-          const assigned = creators.filter(c =>
-            c.titleAssignments?.some(a => a.titleId === title.id)
-          );
-          const byTier = tier => assigned.filter(c =>
-            c.titleAssignments.find(a => a.titleId === title.id)?.tier === tier
-          );
-          const tier1 = byTier('tier1');
-          const tier2 = byTier('tier2');
-          const bench = byTier('bench');
-          const previews = assigned.slice(0, 4);
+      {/* Title cards — full-bleed editorial grid */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+        gap: '2px',
+      }}>
+        {titles.map(title => (
+          <TitleCard
+            key={title.id}
+            title={title}
+            onClick={() => setActiveTitle(title)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
-          return (
-            <div
-              key={title.id}
-              onClick={() => setActiveTitle(title)}
-              style={{ background: '#fff', cursor: 'pointer', padding: '28px 24px 24px', position: 'relative', overflow: 'hidden' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#FAFAFA'}
-              onMouseLeave={e => e.currentTarget.style.background = '#fff'}
-            >
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: title.accent }} />
+function TitleCard({ title, onClick }) {
+  const [hovered, setHovered] = useState(false);
 
-              <div style={{ fontSize: '16px', fontWeight: 500, letterSpacing: '-0.01em', color: 'var(--ink)', marginBottom: '4px' }}>
-                {title.name}
-              </div>
-              <div style={{ fontSize: '10px', letterSpacing: '0.06em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '24px' }}>
-                {title.tagline}
-              </div>
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: 'relative',
+        aspectRatio: '3 / 4',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        background: '#111',
+      }}
+    >
+      {/* Background image */}
+      <img
+        src={title.image}
+        alt=""
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+          transition: 'transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)',
+          transform: hovered ? 'scale(1.05)' : 'scale(1)',
+        }}
+      />
 
-              {previews.length > 0 && (
-                <div style={{ display: 'flex', gap: '3px', marginBottom: '20px' }}>
-                  {previews.map((creator, i) => (
-                    <div key={i} style={{ width: '44px', height: '56px', overflow: 'hidden', background: '#F0EDED', flexShrink: 0 }}>
-                      <img
-                        src={creator.photo}
-                        alt=""
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                        onError={e => { e.target.style.display = 'none'; }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
+      {/* Gradient overlay — always present, deepens on hover */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: hovered
+          ? 'linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%)'
+          : 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0) 100%)',
+        transition: 'background 0.4s ease',
+      }} />
 
-              <div style={{ display: 'flex', gap: '16px', borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
-                {[['I', tier1.length], ['II', tier2.length], ['Bench', bench.length]].map(([label, count]) => (
-                  <div key={label}>
-                    <div style={{ fontSize: '13px', fontWeight: 500, color: count > 0 ? 'var(--ink)' : 'var(--border)' }}>{count}</div>
-                    <div style={{ fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginTop: '1px' }}>Tier {label}</div>
-                  </div>
-                ))}
-                <div style={{ marginLeft: 'auto', alignSelf: 'flex-end' }}>
-                  <span style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.04em' }}>
-                    {assigned.length} talent →
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      {/* Accent bar — top */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0, right: 0,
+        height: '3px',
+        background: title.accent,
+      }} />
+
+      {/* Text — bottom left */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0, left: 0, right: 0,
+        padding: '24px 20px 20px',
+      }}>
+        <div style={{
+          fontSize: '9px',
+          letterSpacing: '0.16em',
+          textTransform: 'uppercase',
+          color: 'rgba(255,255,255,0.6)',
+          marginBottom: '6px',
+          transition: 'opacity 0.3s ease',
+          opacity: hovered ? 1 : 0.8,
+        }}>
+          {title.tagline}
+        </div>
+        <div style={{
+          fontSize: '18px',
+          fontWeight: 400,
+          letterSpacing: '-0.01em',
+          color: '#fff',
+          lineHeight: 1.1,
+        }}>
+          {title.name}
+        </div>
       </div>
     </div>
   );
