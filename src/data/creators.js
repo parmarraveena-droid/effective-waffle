@@ -20,7 +20,6 @@ export const PLATFORMS = {
 };
 
 export const creators = [
-  // ── TIER I ──────────────────────────────────────────────────────────────
   {
     id: 1,
     name: 'Alex Morgan',
@@ -36,6 +35,11 @@ export const creators = [
     bio: 'Wellness creator and movement coach with a devoted community. Known for transformative programs and an authentic approach to balanced living.',
     photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['wellness', 'fitness', 'mindset'],
+    titleAssignments: [
+      { titleId: 'magazine-2', tier: 'tier1' },
+      { titleId: 'magazine-7', tier: 'tier1' },
+      { titleId: 'magazine-8', tier: 'tier2' },
+    ],
   },
   {
     id: 2,
@@ -52,6 +56,11 @@ export const creators = [
     bio: 'Editorial style creator with an effortless aesthetic and a loyal luxury audience. Go-to voice for premium brand campaigns across platforms.',
     photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['luxury', 'editorial', 'beauty'],
+    titleAssignments: [
+      { titleId: 'magazine-1', tier: 'tier1' },
+      { titleId: 'magazine-3', tier: 'tier1' },
+      { titleId: 'magazine-8', tier: 'tier1' },
+    ],
   },
   {
     id: 3,
@@ -68,6 +77,11 @@ export const creators = [
     bio: 'Culture commentator and digital entertainer with unmatched Gen Z reach. Viral storyteller known for relatability and high-frequency output.',
     photo: 'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['pop culture', 'comedy', 'storytelling'],
+    titleAssignments: [
+      { titleId: 'magazine-5', tier: 'tier1' },
+      { titleId: 'magazine-6', tier: 'tier1' },
+      { titleId: 'magazine-10', tier: 'tier1' },
+    ],
   },
   {
     id: 4,
@@ -84,9 +98,11 @@ export const creators = [
     bio: 'Food storyteller and culinary educator bridging heritage cooking with modern American kitchens. Award-nominated creator with deep community trust.',
     photo: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['culinary', 'heritage', 'wellness'],
+    titleAssignments: [
+      { titleId: 'magazine-4', tier: 'tier1' },
+      { titleId: 'magazine-9', tier: 'tier1' },
+    ],
   },
-
-  // ── TIER II ─────────────────────────────────────────────────────────────
   {
     id: 5,
     name: 'Casey Wren',
@@ -102,6 +118,10 @@ export const creators = [
     bio: 'Slow living advocate and interiors creator blending minimalism with warmth. Emerging voice in the considered living and home aesthetics space.',
     photo: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['interiors', 'slow living', 'mindfulness'],
+    titleAssignments: [
+      { titleId: 'magazine-2', tier: 'tier2' },
+      { titleId: 'magazine-7', tier: 'tier1' },
+    ],
   },
   {
     id: 6,
@@ -118,6 +138,10 @@ export const creators = [
     bio: 'Fashion creator known for pushing boundaries while celebrating cultural identity. Rising voice in contemporary streetwear and personal style.',
     photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['streetwear', 'culture', 'beauty'],
+    titleAssignments: [
+      { titleId: 'magazine-1', tier: 'tier2' },
+      { titleId: 'magazine-3', tier: 'tier2' },
+    ],
   },
   {
     id: 7,
@@ -134,6 +158,10 @@ export const creators = [
     bio: 'Home chef bringing old-world cooking technique to accessible everyday meals. Cult following built around weekly series format and warm storytelling.',
     photo: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['technique', 'home cooking', 'culture'],
+    titleAssignments: [
+      { titleId: 'magazine-4', tier: 'tier2' },
+      { titleId: 'magazine-9', tier: 'tier2' },
+    ],
   },
   {
     id: 8,
@@ -150,6 +178,11 @@ export const creators = [
     bio: 'Comedy writer and on-screen talent blending dry wit with social commentary. Resonates strongly across Millennial and Gen Z audiences.',
     photo: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['comedy', 'social commentary', 'scripted'],
+    titleAssignments: [
+      { titleId: 'magazine-5', tier: 'tier2' },
+      { titleId: 'magazine-6', tier: 'tier2' },
+      { titleId: 'magazine-10', tier: 'tier2' },
+    ],
   },
   {
     id: 9,
@@ -166,9 +199,11 @@ export const creators = [
     bio: 'Wellness and identity creator speaking to an audience navigating healing, ambition, and modern life. High-trust community with strong word-of-mouth growth.',
     photo: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['mental health', 'community', 'identity'],
+    titleAssignments: [
+      { titleId: 'magazine-3', tier: 'tier2' },
+      { titleId: 'magazine-10', tier: 'tier1' },
+    ],
   },
-
-  // ── BENCH — Lifestyle & Wellness ────────────────────────────────────────
   {
     id: 10,
     name: 'Mia Reyes',
@@ -184,6 +219,10 @@ export const creators = [
     bio: 'Movement instructor and breathwork practitioner with a deeply engaged niche community in the wellness space.',
     photo: 'https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['movement', 'breathwork', 'wellness'],
+    titleAssignments: [
+      { titleId: 'magazine-2', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-8', tier: 'bench', exclusive: false },
+    ],
   },
   {
     id: 11,
@@ -200,9 +239,11 @@ export const creators = [
     bio: 'Outdoor wellness advocate and recovery guide. High-trust community in the adventure, performance, and cold therapy space.',
     photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['outdoors', 'recovery', 'adventure'],
+    titleAssignments: [
+      { titleId: 'magazine-2', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-7', tier: 'bench', exclusive: false },
+    ],
   },
-
-  // ── BENCH — Fashion & Beauty ─────────────────────────────────────────────
   {
     id: 12,
     name: 'Isla Porter',
@@ -218,6 +259,11 @@ export const creators = [
     bio: 'Sustainable fashion advocate and vintage stylist bridging conscious consumption with elevated personal style.',
     photo: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['sustainable', 'vintage', 'styling'],
+    titleAssignments: [
+      { titleId: 'magazine-1', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-3', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-8', tier: 'bench', exclusive: false },
+    ],
   },
   {
     id: 13,
@@ -234,9 +280,12 @@ export const creators = [
     bio: "Men's grooming and luxury streetwear creator with exceptional conversion rates and an audience of high-intent buyers.",
     photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['menswear', 'grooming', 'luxury'],
+    titleAssignments: [
+      { titleId: 'magazine-1', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-3', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-5', tier: 'bench', exclusive: true },
+    ],
   },
-
-  // ── BENCH — Food & Culinary ──────────────────────────────────────────────
   {
     id: 14,
     name: 'Yuki Hana',
@@ -252,6 +301,11 @@ export const creators = [
     bio: 'Pastry chef and baking educator with a highly loyal following built around fermentation, sourdough, and technique-first content.',
     photo: 'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['baking', 'fermentation', 'education'],
+    titleAssignments: [
+      { titleId: 'magazine-4', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-7', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-9', tier: 'bench', exclusive: true },
+    ],
   },
   {
     id: 15,
@@ -268,9 +322,11 @@ export const creators = [
     bio: 'Regional cuisine creator bringing bold flavors to a new generation. Strong brand partnership history and rapidly growing platform presence.',
     photo: 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['regional', 'bold flavors', 'culture'],
+    titleAssignments: [
+      { titleId: 'magazine-4', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-9', tier: 'bench', exclusive: false },
+    ],
   },
-
-  // ── BENCH — Entertainment ─────────────────────────────────────────────────
   {
     id: 16,
     name: 'Maya Voss',
@@ -286,6 +342,10 @@ export const creators = [
     bio: 'Pop culture commentator and micro-documentary creator known for long-form storytelling compressed into short-format video.',
     photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['pop culture', 'documentary', 'storytelling'],
+    titleAssignments: [
+      { titleId: 'magazine-6', tier: 'bench', exclusive: true },
+      { titleId: 'magazine-10', tier: 'bench', exclusive: false },
+    ],
   },
   {
     id: 17,
@@ -302,5 +362,10 @@ export const creators = [
     bio: 'Music and culture essayist with a deeply engaged audience of enthusiasts. Known for thoughtful long-form video and sharp cultural perspective.',
     photo: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=600&h=900&fit=crop&crop=top&q=90',
     tags: ['music', 'essays', 'culture'],
+    titleAssignments: [
+      { titleId: 'magazine-5', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-6', tier: 'bench', exclusive: false },
+      { titleId: 'magazine-10', tier: 'bench', exclusive: false },
+    ],
   },
 ];

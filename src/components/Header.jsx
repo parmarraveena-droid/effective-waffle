@@ -1,5 +1,6 @@
 const NAV_ITEMS = [
-  { key: 'roster', label: 'Roster' },
+  { key: 'titles', label: 'Titles' },
+  { key: 'roster', label: 'All Talent' },
   { key: 'deliverables', label: 'Deliverables' },
   { key: 'campaigns', label: 'Campaigns' },
   { key: 'reports', label: 'Reports' },

@@ -8,6 +8,7 @@ import CreatorModal from './components/CreatorModal';
 import CreatorForm from './components/CreatorForm';
 import DeliverablesView from './views/DeliverablesView';
 import CampaignsView from './views/CampaignsView';
+import TitlesView from './views/TitlesView';
 
 function RosterView({ onCreatorClick }) {
   const { creators } = useApp();
@@ -106,7 +107,7 @@ function ReportsView() {
 
 function AppInner() {
   const { creators } = useApp();
-  const [activeView, setActiveView] = useState('roster');
+  const [activeView, setActiveView] = useState('titles');
   const [selectedCreator, setSelectedCreator] = useState(null);
   const [creatorFormMode, setCreatorFormMode] = useState(null);
   const [creatorFormTarget, setCreatorFormTarget] = useState(null);
@@ -124,9 +125,8 @@ function AppInner() {
         onAddCreator={openAdd}
       />
 
-      {activeView === 'roster' && (
-        <RosterView onCreatorClick={setSelectedCreator} />
-      )}
+      {activeView === 'titles' && <TitlesView onCreatorClick={setSelectedCreator} />}
+      {activeView === 'roster' && <RosterView onCreatorClick={setSelectedCreator} />}
       {activeView === 'deliverables' && <DeliverablesView />}
       {activeView === 'campaigns' && <CampaignsView />}
       {activeView === 'reports' && <ReportsView />}
