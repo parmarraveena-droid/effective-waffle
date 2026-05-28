@@ -1,30 +1,147 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { titles } from '../data/titles';
 import { ARCHETYPES } from '../data/creators';
 import { useApp } from '../context/AppContext';
-import CreatorCard from '../components/CreatorCard';
 import TitleDetailView from './TitleDetailView';
 
-function ArchetypeGrid({ creators, archetype, onCreatorClick, onBack }) {
-  const arch = ARCHETYPES[archetype];
+function BrowseDropdown({ filter, onFilter }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function onOutsideClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', onOutsideClick);
+    return () => document.removeEventListener('mousedown', onOutsideClick);
+  }, []);
+
+  const activeLabel =
+    filter.type === 'title'
+      ? titles.find(t => t.id === filter.value)?.name
+      : filter.type === 'archetype'
+      ? ARCHETYPES[filter.value]?.label
+      : null;
+
+  function select(type, value) {
+    // toggle off if already active
+    if (filter.type === type && filter.value === value) {
+      onFilter({ type: null, value: null });
+    } else {
+      onFilter({ type, value });
+    }
+    setOpen(false);
+  }
+
   return (
-    <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', paddingBottom: '16px', borderBottom: '1px solid var(--border)' }}>
-        <button
-          onClick={onBack}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}
-        >
-          ← All Titles
-        </button>
-        <span style={{ width: '1px', height: '14px', background: 'var(--border)' }} />
-        <span style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ink)' }}>
-          {arch.label}
-        </span>
-        <span style={{ fontSize: '11px', color: 'var(--muted)' }}>— {creators.length} creators across all titles</span>
-      </div>
-      <div style={{ display: 'grid', gap: '2px', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))' }}>
-        {creators.map(c => <CreatorCard key={c.id} creator={c} onClick={onCreatorClick} />)}
-      </div>
+    <div ref={ref} style={{ position: 'relative', flexShrink: 0 }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          background: 'none', border: 'none', cursor: 'pointer',
+          fontFamily: 'Inter, sans-serif', fontSize: '10px',
+          letterSpacing: '0.14em', textTransform: 'uppercase',
+          color: activeLabel ? 'var(--ink)' : 'var(--muted)',
+          display: 'flex', alignItems: 'center', gap: '6px',
+          padding: 0,
+        }}
+      >
+        Browse by
+        {activeLabel && (
+          <>
+            <span style={{ color: 'var(--border)' }}>·</span>
+            <span style={{ color: 'var(--ink)', fontWeight: 500 }}>{activeLabel}</span>
+          </>
+        )}
+        <span style={{
+          fontSize: '8px', color: 'var(--muted)',
+          transform: open ? 'rotate(180deg)' : 'none',
+          transition: 'transform 0.15s ease',
+          display: 'inline-block',
+        }}>▾</span>
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'absolute', top: 'calc(100% + 8px)', left: 0,
+          background: '#fff', border: '1px solid var(--border)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+          minWidth: '220px', zIndex: 100,
+        }}>
+          {/* By Title section */}
+          <div style={{ padding: '12px 0 4px' }}>
+            <div style={{
+              padding: '0 16px 8px',
+              fontSize: '9px', letterSpacing: '0.14em',
+              textTransform: 'uppercase', color: 'var(--muted)',
+            }}>
+              By Title
+            </div>
+            {titles.map(t => {
+              const active = filter.type === 'title' && filter.value === t.id;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => select('title', t.id)}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left',
+                    background: active ? 'var(--cream)' : 'none',
+                    border: 'none', cursor: 'pointer',
+                    padding: '6px 16px',
+                    fontFamily: 'Inter, sans-serif', fontSize: '11px',
+                    letterSpacing: '0.06em', textTransform: 'uppercase',
+                    color: active ? 'var(--ink)' : 'var(--muted)',
+                    borderLeft: active ? '2px solid var(--ink)' : '2px solid transparent',
+                  }}
+                  onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'var(--cream)'; }}
+                  onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'none'; }}
+                >
+                  {t.name}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Divider */}
+          <div style={{ height: '1px', background: 'var(--border)', margin: '4px 0' }} />
+
+          {/* By Archetype section */}
+          <div style={{ padding: '4px 0 12px' }}>
+            <div style={{
+              padding: '8px 16px 8px',
+              fontSize: '9px', letterSpacing: '0.14em',
+              textTransform: 'uppercase', color: 'var(--muted)',
+            }}>
+              By Archetype
+            </div>
+            {Object.entries(ARCHETYPES).map(([key, { label, color }]) => {
+              const active = filter.type === 'archetype' && filter.value === key;
+              return (
+                <button
+                  key={key}
+                  onClick={() => select('archetype', key)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    width: '100%', textAlign: 'left',
+                    background: active ? 'var(--cream)' : 'none',
+                    border: 'none', cursor: 'pointer',
+                    padding: '6px 16px',
+                    fontFamily: 'Inter, sans-serif', fontSize: '11px',
+                    letterSpacing: '0.06em', textTransform: 'uppercase',
+                    color: active ? 'var(--ink)' : 'var(--muted)',
+                    borderLeft: active ? '2px solid var(--ink)' : '2px solid transparent',
+                  }}
+                  onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'var(--cream)'; }}
+                  onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'none'; }}
+                >
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: color, flexShrink: 0 }} />
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -32,19 +149,7 @@ function ArchetypeGrid({ creators, archetype, onCreatorClick, onBack }) {
 export default function TitlesView({ onCreatorClick }) {
   const { creators } = useApp();
   const [activeTitle, setActiveTitle] = useState(null);
-  const [archetypeFilter, setArchetypeFilter] = useState(null);
-
-  if (archetypeFilter) {
-    const filtered = creators.filter(c => c.archetype === archetypeFilter);
-    return (
-      <ArchetypeGrid
-        creators={filtered}
-        archetype={archetypeFilter}
-        onCreatorClick={onCreatorClick}
-        onBack={() => setArchetypeFilter(null)}
-      />
-    );
-  }
+  const [filter, setFilter] = useState({ type: null, value: null });
 
   if (activeTitle) {
     return (
@@ -56,44 +161,43 @@ export default function TitlesView({ onCreatorClick }) {
     );
   }
 
+  const filteredTitles =
+    filter.type === 'title'
+      ? titles.filter(t => t.id === filter.value)
+      : filter.type === 'archetype'
+      ? titles.filter(t =>
+          creators.some(c =>
+            c.archetype === filter.value &&
+            c.titleAssignments?.some(a => a.titleId === t.id)
+          )
+        )
+      : titles;
+
+  const filteredCreatorCount =
+    filter.type === 'archetype'
+      ? creators.filter(c => c.archetype === filter.value).length
+      : filter.type === 'title'
+      ? creators.filter(c => c.titleAssignments?.some(a => a.titleId === filter.value)).length
+      : creators.length;
+
   return (
     <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
 
-      {/* Archetype filter bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px', flexWrap: 'wrap' }}>
-        <span style={{ fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', flexShrink: 0 }}>
-          Browse by archetype
-        </span>
-        {Object.entries(ARCHETYPES).map(([key, { label, color }]) => (
-          <button
-            key={key}
-            onClick={() => setArchetypeFilter(key)}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontFamily: 'Inter, sans-serif', fontSize: '11px',
-              letterSpacing: '0.06em', textTransform: 'uppercase',
-              color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '6px',
-              paddingBottom: '2px', borderBottom: '1px solid transparent',
-            }}
-            onMouseEnter={e => e.currentTarget.style.borderBottomColor = 'var(--ink)'}
-            onMouseLeave={e => e.currentTarget.style.borderBottomColor = 'transparent'}
-          >
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: color, flexShrink: 0 }} />
-            {label}
-          </button>
-        ))}
+      {/* Filter bar */}
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '32px' }}>
+        <BrowseDropdown filter={filter} onFilter={setFilter} />
         <span style={{ marginLeft: 'auto', fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.06em' }}>
-          {titles.length} titles · {creators.length} creators
+          {filteredTitles.length} {filteredTitles.length === 1 ? 'title' : 'titles'} · {filteredCreatorCount} creators
         </span>
       </div>
 
-      {/* Title cards — full-bleed editorial grid */}
+      {/* Title cards */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
         gap: '2px',
       }}>
-        {titles.map(title => (
+        {filteredTitles.map(title => (
           <TitleCard
             key={title.id}
             title={title}
@@ -121,7 +225,6 @@ function TitleCard({ title, onClick }) {
         background: '#111',
       }}
     >
-      {/* Background image */}
       <img
         src={title.image}
         alt=""
@@ -137,7 +240,6 @@ function TitleCard({ title, onClick }) {
         }}
       />
 
-      {/* Gradient overlay — always present, deepens on hover */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -147,7 +249,6 @@ function TitleCard({ title, onClick }) {
         transition: 'background 0.4s ease',
       }} />
 
-      {/* Accent bar — top */}
       <div style={{
         position: 'absolute',
         top: 0, left: 0, right: 0,
@@ -155,7 +256,6 @@ function TitleCard({ title, onClick }) {
         background: title.accent,
       }} />
 
-      {/* Text — bottom left */}
       <div style={{
         position: 'absolute',
         bottom: 0, left: 0, right: 0,
@@ -167,8 +267,8 @@ function TitleCard({ title, onClick }) {
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.6)',
           marginBottom: '6px',
-          transition: 'opacity 0.3s ease',
           opacity: hovered ? 1 : 0.8,
+          transition: 'opacity 0.3s ease',
         }}>
           {title.tagline}
         </div>
