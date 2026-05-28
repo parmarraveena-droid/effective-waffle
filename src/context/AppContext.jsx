@@ -3,6 +3,8 @@ import { creators as seedCreators } from '../data/creators';
 
 const AppContext = createContext(null);
 
+const DATA_VERSION = 3;
+
 const SEED_DELIVERABLES = [
   {
     id: 'dlv-001',
@@ -82,12 +84,14 @@ function loadState() {
     const raw = localStorage.getItem('cp_state');
     if (raw) {
       const parsed = JSON.parse(raw);
-      return {
-        creators: parsed.creators ?? seedCreators,
-        deliverables: parsed.deliverables ?? SEED_DELIVERABLES,
-        campaigns: parsed.campaigns ?? SEED_CAMPAIGNS,
-        notes: parsed.notes ?? {},
-      };
+      if (parsed.version === DATA_VERSION) {
+        return {
+          creators: parsed.creators ?? seedCreators,
+          deliverables: parsed.deliverables ?? SEED_DELIVERABLES,
+          campaigns: parsed.campaigns ?? SEED_CAMPAIGNS,
+          notes: parsed.notes ?? {},
+        };
+      }
     }
   } catch {}
   return {
@@ -102,7 +106,7 @@ export function AppProvider({ children }) {
   const [state, setState] = useState(loadState);
 
   useEffect(() => {
-    localStorage.setItem('cp_state', JSON.stringify(state));
+    localStorage.setItem('cp_state', JSON.stringify({ ...state, version: DATA_VERSION }));
   }, [state]);
 
   const setCreators = fn =>
