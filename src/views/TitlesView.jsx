@@ -2,7 +2,32 @@ import { useState, useRef, useEffect } from 'react';
 import { titles } from '../data/titles';
 import { ARCHETYPES } from '../data/creators';
 import { useApp } from '../context/AppContext';
+import CreatorCard from '../components/CreatorCard';
 import TitleDetailView from './TitleDetailView';
+
+function ArchetypeGrid({ creators, archetype, onCreatorClick, onBack }) {
+  const arch = ARCHETYPES[archetype];
+  return (
+    <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '40px 24px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', paddingBottom: '16px', borderBottom: '1px solid var(--border)' }}>
+        <button
+          onClick={onBack}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}
+        >
+          ← All Titles
+        </button>
+        <span style={{ width: '1px', height: '14px', background: 'var(--border)' }} />
+        <span style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ink)' }}>
+          {arch.label}
+        </span>
+        <span style={{ fontSize: '11px', color: 'var(--muted)' }}>— {creators.length} creators</span>
+      </div>
+      <div style={{ display: 'grid', gap: '2px', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))' }}>
+        {creators.map(c => <CreatorCard key={c.id} creator={c} onClick={onCreatorClick} />)}
+      </div>
+    </div>
+  );
+}
 
 function BrowseDropdown({ filter, onFilter }) {
   const [open, setOpen] = useState(false);
@@ -161,22 +186,25 @@ export default function TitlesView({ onCreatorClick }) {
     );
   }
 
+  if (filter.type === 'archetype') {
+    const benched = creators.filter(c => c.archetype === filter.value);
+    return (
+      <ArchetypeGrid
+        creators={benched}
+        archetype={filter.value}
+        onCreatorClick={onCreatorClick}
+        onBack={() => setFilter({ type: null, value: null })}
+      />
+    );
+  }
+
   const filteredTitles =
     filter.type === 'title'
       ? titles.filter(t => t.id === filter.value)
-      : filter.type === 'archetype'
-      ? titles.filter(t =>
-          creators.some(c =>
-            c.archetype === filter.value &&
-            c.titleAssignments?.some(a => a.titleId === t.id)
-          )
-        )
       : titles;
 
   const filteredCreatorCount =
-    filter.type === 'archetype'
-      ? creators.filter(c => c.archetype === filter.value).length
-      : filter.type === 'title'
+    filter.type === 'title'
       ? creators.filter(c => c.titleAssignments?.some(a => a.titleId === filter.value)).length
       : creators.length;
 
